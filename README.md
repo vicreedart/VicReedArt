@@ -50,7 +50,7 @@ public/images/demo/  Optimized, labeled preview illustrations
 
 ## Content and Studio
 
-The artist's verified Sanity project is `oifmrrva`, with dataset `production`. These public identifiers are included in `.env.example`. Set `SANITY_PROJECT_ID` / `SANITY_DATASET` for the build and the matching `SANITY_STUDIO_PROJECT_ID` / `SANITY_STUDIO_DATASET` for the editor. Tokens remain private.
+The artist's verified Sanity project is `oifmrrva`, with dataset `production`. The `.env.example` template contains variable names with empty values. Set `SANITY_PROJECT_ID=oifmrrva` and `SANITY_DATASET=production` for the build, the matching `SANITY_STUDIO_PROJECT_ID` / `SANITY_STUDIO_DATASET` for the editor, and `SANITY_STUDIO_HOSTNAME=vicreedart`. Tokens remain private.
 
 ```sh
 npm run studio:dev
