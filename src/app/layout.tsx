@@ -45,7 +45,8 @@ export default function RootLayout({
         </a>
         {isPreview ? (
           <div className="preview-notice">
-            {content.mode === "demo"
+            {content.mode === "demo" ||
+            content.artworks.some((art) => art.isDemo)
               ? "Design preview · Illustrative artwork & sample copy"
               : "Site preview · Inquiries are disabled"}
             <span>Not the live portfolio</span>

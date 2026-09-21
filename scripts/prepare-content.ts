@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { createClient } from "@sanity/client";
 import { contentSchema } from "../src/content/model.ts";
 import { demoContent } from "../src/content/demo.ts";
+import { assertSanityTarget } from "../studio/sanity-target.ts";
 
 for (const file of [".env.local", ".env"])
   if (existsSync(file)) process.loadEnvFile(file);
@@ -27,6 +28,7 @@ let data: unknown = demoContent;
 if (mode === "sanity") {
   const projectId = process.env.SANITY_PROJECT_ID,
     dataset = process.env.SANITY_DATASET;
+  assertSanityTarget(projectId, dataset);
   if (!projectId || !dataset)
     throw new Error(
       "Set the artist-owned SANITY_PROJECT_ID and SANITY_DATASET.",

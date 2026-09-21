@@ -4,12 +4,19 @@ A coastal mosaic artist portfolio: Next.js and TypeScript export static HTML, Cl
 
 **Current content is a labeled design preview.** The included artwork imagery is generated illustration, not the artist's original work. No prices or final biography are invented. Preview forms do not send email. A production build refuses demo content, unapproved CMS settings, or incomplete public form configuration.
 
+- Preview: https://vicreedart-preview.victoriareedart.workers.dev
+- Content editor: https://vicreedart.sanity.studio
+- Review: https://github.com/vicreedart/VicReedArt/pull/1
+
+The preview reads the artist's Sanity dataset during builds. Four labeled sample artworks and six sample images have been imported; the temporary import credential has been revoked. The preview Worker is connected to the `codex/artist-portfolio` branch. Production remains gated until approved content, domain and inquiry configuration are ready.
+
 ## Ownership
 
 - Source: https://github.com/vicreedart/VicReedArt
 - Cloudflare: `Victoriareedart@gmail.com's Account`, ID `96beea4cdf2cb1c69115c88264af1c01`.
 - Production Worker: `vicreedart`; separate preview Worker: `vicreedart-preview`.
-- Sanity, Resend and the domain must also belong to the artist.
+- Sanity: project `oifmrrva`, dataset `production`, in the artist's **Vic Reed Art** organization. Content import, fetching and Studio configuration reject other destinations.
+- Resend and the domain must also belong to the artist.
 - Never push to the developer's repositories or deploy to their personal Cloudflare or Vercel accounts. The deployment scripts check the Git remote and exact Cloudflare account before running Wrangler.
 
 ## Local setup
@@ -43,7 +50,7 @@ public/images/demo/  Optimized, labeled preview illustrations
 
 ## Content and Studio
 
-The artist first creates a Sanity project with a `production` dataset. Set `SANITY_PROJECT_ID` / `SANITY_DATASET` for the build and the matching `SANITY_STUDIO_PROJECT_ID` / `SANITY_STUDIO_DATASET` for the editor. The identifiers are public; tokens are not.
+The artist's verified Sanity project is `oifmrrva`, with dataset `production`. These public identifiers are included in `.env.example`. Set `SANITY_PROJECT_ID` / `SANITY_DATASET` for the build and the matching `SANITY_STUDIO_PROJECT_ID` / `SANITY_STUDIO_DATASET` for the editor. Tokens remain private.
 
 ```sh
 npm run studio:dev
@@ -56,7 +63,7 @@ The Studio command uses the configuration in `studio/` and the dependencies inst
 Optional, one-time preview seed:
 
 ```sh
-npm run studio:seed -- --project=ARTIST_PROJECT_ID
+npm run studio:seed -- --project=oifmrrva
 ```
 
 This requires a temporary `SANITY_WRITE_TOKEN`, uploads the six sample illustrations, and creates labeled sample documents. It refuses a project that already contains artwork or website settings. Revoke the temporary token afterward. Never use the seed as final content. Seeded commissions and production approval are disabled.
@@ -119,10 +126,10 @@ Buttons lock during sending. Stable Resend idempotency keys protect explicit ret
 
 Static pages use responsive WebP assets or a fixed set of Sanity CDN image widths, lazy images below the fold, self-hosted fonts, immutable hashed assets, CSP script hashes, and no analytics. Preview has a visible banner, `noindex` headers/metadata, and a disallowing robots file. This discourages indexing; it is not access control.
 
-No paid plan is activated by this repository. Provider allowances still apply; rate limits and the 10 ms Worker CPU ceiling do not guarantee a hard account-wide cost cap. Keep spending notifications configured in the artist's provider accounts. Verify large attachments against the selected Cloudflare plan before opening the live form; a resource-limit failure should be investigated before raising CPU limits or changing plans.
+No paid plan is activated by this repository. The current Cloudflare account uses the Free plan, which supplies its own CPU limit and rejects an explicit `limits.cpu_ms` setting; that setting is intentionally omitted. Provider allowances still apply, and request rate limits do not guarantee a hard account-wide cost cap. Keep spending notifications configured in the artist's provider accounts. Verify large attachments against the selected Cloudflare plan before opening the live form; investigate resource-limit failures before changing plans.
 
 ## Validation
 
-`npm run check` runs content validation, ESLint, strict TypeScript for the site/Worker/Studio, 39 automated inquiry/ownership tests, and the optimized static export. `npm run studio:build` separately checks the editor bundle. `npx wrangler deploy --env preview --dry-run` bundles the Cloudflare entry point without publishing. Browser verification should use `npm run preview`, including keyboard/mobile navigation, artwork links, form errors and disabled preview submission.
+`npm run check` runs content validation, ESLint, strict TypeScript for the site/Worker/Studio, automated inquiry/ownership tests, and the optimized static export. `npm run studio:build` separately checks the editor bundle. `npx wrangler deploy --env preview --dry-run` bundles the Cloudflare entry point without publishing. Browser verification should use `npm run preview`, including keyboard/mobile navigation, artwork links, form errors and disabled preview submission.
 
 Tests mock Turnstile and Resend; they do not send real emails. A final real-domain verification and an artist-approved test inquiry are required after credentials are connected. See [HANDOFF.md](HANDOFF.md) for daily editing, launch and rollback, and [ASSETS.md](ASSETS.md) for temporary imagery provenance.

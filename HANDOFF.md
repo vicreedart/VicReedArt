@@ -4,11 +4,14 @@
 
 Your source code belongs in **vicreedart/VicReedArt** on GitHub. Your website belongs in **Victoriareedart@gmail.com's Account** on Cloudflare, account ID `96beea4cdf2cb1c69115c88264af1c01`. Your Sanity project, Resend email account and domain should also stay in accounts you control. A future developer should receive an invitation, not your password.
 
-The current website is a design preview. Its illustrations, sample artwork titles and sample availability are labeled. They must be replaced with your own photographs and approved details before public launch. The preview inquiry form never sends messages. Your new Sanity account still needs a project and dataset connected to this code; your Resend account needs a verified sending domain and its sending key configured in Cloudflare.
+The current website is a design preview. Its illustrations, sample artwork titles and sample availability are labeled. They must be replaced with your own photographs and approved details before public launch. The preview inquiry form never sends messages. Your verified Sanity project is `oifmrrva`, dataset `production`, in your **Vic Reed Art** organization. Four sample artworks have been imported, and the temporary import token has been revoked. Your Resend account needs a verified sending domain and its sending key configured in Cloudflare.
+
+- Website preview: https://vicreedart-preview.victoriareedart.workers.dev
+- Your content editor: https://vicreedart.sanity.studio
 
 ## Edit the website
 
-Once your Studio is deployed, bookmark its address. Sign in with the Google account you used for Sanity. You can also open your project from https://www.sanity.io/manage and follow its Studio link.
+Bookmark your content editor above. Sign in with the Google account you used for Sanity. You can also open your project from https://www.sanity.io/manage and follow its Studio link.
 
 The editor has two main sections: **Artwork** and **Website text & settings**. Changes save as drafts while you work. Click **Publish** when a document is ready. After the publish webhook is connected, Cloudflare rebuilds the website; wait for that deployment to finish before expecting to see the change. A build failure preserves the previously deployed website.
 
@@ -50,7 +53,7 @@ Check spam filtering and your inbox regularly. Resend can show whether a message
 
 Complete these items with your developer:
 
-1. Create your Sanity project and `production` dataset. Connect the public project ID and dataset and deploy your Studio. If you use sample seed content, replace every sample image and record.
+1. Open your Studio for Sanity project `oifmrrva`, dataset `production`, and replace every sample image and record.
 2. Supply approved biography, original photographs, artwork facts, contact details and social links. Review every page on a phone and computer. Disable Temporary sample artwork for entries only after replacing the samples. Enable Content approved for launch when everything is accurate.
 3. Connect your domain in your Cloudflare account. No domain purchase is included in the code. Set the final website address in build settings and `wrangler.jsonc`.
 4. Verify a sending domain in your Resend account. Configure its sending-only key, From address and your destination inbox as secrets on the production Cloudflare Worker.

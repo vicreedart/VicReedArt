@@ -7,5 +7,6 @@
 - Verify the exact repository and account before every push or deployment. Never override the deployment guard to use another account.
 - Use Next.js static export and Cloudflare-native APIs. No Vercel services, deployment config, analytics or image optimization endpoints.
 - Sanity and Resend must be owned by the artist. Never commit secrets, inquiry data, private photographs or authentication files.
+- The approved Sanity project is `oifmrrva`, dataset `production`, in the artist's `Vic Reed Art` organization. Never seed, read content from, or deploy a Studio for a different project.
 - Preview content must be visibly labeled. Production must require approved Sanity content and prohibit demo imagery.
 - Run lint, type checking, form tests and a production-format build before delivery. Verify desktop and mobile in a browser.

@@ -1,9 +1,11 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./schema";
+import { assertSanityTarget } from "./sanity-target";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
 const dataset = process.env.SANITY_STUDIO_DATASET;
+assertSanityTarget(projectId, dataset);
 if (!projectId || !dataset)
   throw new Error(
     "Set SANITY_STUDIO_PROJECT_ID and SANITY_STUDIO_DATASET for the artist’s Sanity project.",

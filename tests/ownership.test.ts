@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { assertTargets } from "../scripts/targets.mjs";
+import { assertSanityTarget } from "../studio/sanity-target";
 const account = "96beea4cdf2cb1c69115c88264af1c01";
 describe("deployment ownership", () => {
   it("allows only the agreed repository and account", () =>
@@ -42,4 +43,16 @@ describe("deployment ownership", () => {
         "other",
       ),
     ).toThrow());
+});
+
+describe("Sanity ownership", () => {
+  it("allows the artist’s verified project and dataset", () =>
+    expect(() => assertSanityTarget("oifmrrva", "production")).not.toThrow());
+  it.each([
+    ["another-project", "production"],
+    ["oifmrrva", "another-dataset"],
+    [undefined, undefined],
+  ])("refuses unapproved CMS destination %s/%s", (project, dataset) =>
+    expect(() => assertSanityTarget(project, dataset)).toThrow(),
+  );
 });

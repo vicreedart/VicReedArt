@@ -1,11 +1,13 @@
 import { createClient } from "@sanity/client";
 import { createReadStream, existsSync } from "node:fs";
 import { demoContent } from "../src/content/demo.ts";
+import { assertSanityTarget } from "../studio/sanity-target.ts";
 for (const file of [".env.local", ".env"])
   if (existsSync(file)) process.loadEnvFile(file);
 const projectId = process.env.SANITY_PROJECT_ID,
   dataset = process.env.SANITY_DATASET,
   token = process.env.SANITY_WRITE_TOKEN;
+assertSanityTarget(projectId, dataset);
 if (!projectId || !dataset || !token)
   throw new Error(
     "Set artist-owned SANITY_PROJECT_ID, SANITY_DATASET, and a temporary SANITY_WRITE_TOKEN.",
@@ -49,21 +51,19 @@ const image = (photo: (typeof photos)[number]) => ({
   position: photo.position,
 });
 const s = demoContent.settings;
-let transaction = client
-  .transaction()
-  .create({
-    _id: "siteSettings",
-    _type: "siteSettings",
-    ...s,
-    readyToPublish: false,
-    home: { ...s.home, hero: image(s.home.hero) },
-    about: { ...s.about, portrait: image(s.about.portrait) },
-    commissions: {
-      ...s.commissions,
-      isOpen: false,
-      image: image(s.commissions.image),
-    },
-  });
+let transaction = client.transaction().create({
+  _id: "siteSettings",
+  _type: "siteSettings",
+  ...s,
+  readyToPublish: false,
+  home: { ...s.home, hero: image(s.home.hero) },
+  about: { ...s.about, portrait: image(s.about.portrait) },
+  commissions: {
+    ...s.commissions,
+    isOpen: false,
+    image: image(s.commissions.image),
+  },
+});
 for (const art of demoContent.artworks) {
   const { id, slug, images, ...fields } = art;
   transaction = transaction.create({
