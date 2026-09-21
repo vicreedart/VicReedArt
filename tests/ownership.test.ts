@@ -5,6 +5,22 @@ import { readFileSync } from "node:fs";
 import { parse, type ParseError } from "jsonc-parser";
 const account = "96beea4cdf2cb1c69115c88264af1c01";
 describe("deployment ownership", () => {
+  it("supports authenticated HTTPS checkout URLs without broadening the repository", () => {
+    expect(() =>
+      assertTargets(
+        "https://x-access-token:example-build-credential@github.com/vicreedart/VicReedArt.git/",
+        account,
+        account,
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertTargets(
+        "https://github.com@another-host.test/vicreedart/VicReedArt.git",
+        account,
+        account,
+      ),
+    ).toThrow();
+  });
   it("accepts the checked-in Cloudflare JSONC configuration and artist account", () => {
     const errors: ParseError[] = [];
     const config = parse(readFileSync("wrangler.jsonc", "utf8"), errors, {
