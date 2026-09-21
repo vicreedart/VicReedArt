@@ -1,8 +1,24 @@
 import { describe, it, expect } from "vitest";
 import { assertTargets } from "../scripts/targets.mjs";
 import { assertSanityTarget } from "../studio/sanity-target";
+import { readFileSync } from "node:fs";
+import { parse, type ParseError } from "jsonc-parser";
 const account = "96beea4cdf2cb1c69115c88264af1c01";
 describe("deployment ownership", () => {
+  it("accepts the checked-in Cloudflare JSONC configuration and artist account", () => {
+    const errors: ParseError[] = [];
+    const config = parse(readFileSync("wrangler.jsonc", "utf8"), errors, {
+      allowTrailingComma: true,
+    });
+    expect(errors).toEqual([]);
+    expect(() =>
+      assertTargets(
+        "https://github.com/vicreedart/VicReedArt.git",
+        config.account_id,
+      ),
+    ).not.toThrow();
+    expect(config.env.preview.name).toBe("vicreedart-preview");
+  });
   it("allows only the agreed repository and account", () =>
     expect(() =>
       assertTargets(

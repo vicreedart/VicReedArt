@@ -8,7 +8,7 @@ A coastal mosaic artist portfolio: Next.js and TypeScript export static HTML, Cl
 - Content editor: https://vicreedart.sanity.studio
 - Review: https://github.com/vicreedart/VicReedArt/pull/1
 
-The preview reads the artist's Sanity dataset during builds. Four labeled sample artworks and six sample images have been imported; the temporary import credential has been revoked. The preview Worker is connected to the `codex/artist-portfolio` branch. Production remains gated until approved content, domain and inquiry configuration are ready.
+The preview reads the artist's Sanity dataset during builds. Four labeled sample artworks and six sample images have been imported; the temporary import credential has been revoked. The preview Worker is connected to the `codex/artist-portfolio` branch. The Sanity webhook **Cloudflare artist preview** rebuilds that preview after published artwork or website settings change; it excludes drafts and releases. Production remains gated until approved content, domain and inquiry configuration are ready.
 
 ## Ownership
 

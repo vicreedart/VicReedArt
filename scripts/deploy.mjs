@@ -2,10 +2,16 @@ import { readFileSync } from "node:fs";
 import { spawnSync, execFileSync } from "node:child_process";
 import { assertTargets } from "./targets.mjs";
 import { createHash } from "node:crypto";
+import { parse } from "jsonc-parser";
 const mode = process.argv[2];
 if (!["production", "preview"].includes(mode))
   throw new Error("Choose production or preview.");
-const config = JSON.parse(readFileSync("wrangler.jsonc", "utf8"));
+const configErrors = [];
+const config = parse(readFileSync("wrangler.jsonc", "utf8"), configErrors, {
+  allowTrailingComma: true,
+});
+if (configErrors.length)
+  throw new Error("Invalid wrangler.jsonc configuration.");
 const remote = execFileSync("git", ["remote", "get-url", "--push", "origin"], {
   encoding: "utf8",
 }).trim();

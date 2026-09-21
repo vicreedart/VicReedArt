@@ -13,7 +13,7 @@ The current website is a design preview. Its illustrations, sample artwork title
 
 Bookmark your content editor above. Sign in with the Google account you used for Sanity. You can also open your project from https://www.sanity.io/manage and follow its Studio link.
 
-The editor has two main sections: **Artwork** and **Website text & settings**. Changes save as drafts while you work. Click **Publish** when a document is ready. After the publish webhook is connected, Cloudflare rebuilds the website; wait for that deployment to finish before expecting to see the change. A build failure preserves the previously deployed website.
+The editor has two main sections: **Artwork** and **Website text & settings**. Changes save as drafts while you work. Click **Publish** when a document is ready. Publishing currently rebuilds the labeled preview on Cloudflare; wait for that deployment to finish before expecting to see the change. At launch, the publishing connection will be changed to the production website. A build failure preserves the previously deployed website.
 
 ### Add artwork
 
